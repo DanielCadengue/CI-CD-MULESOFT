@@ -9,16 +9,139 @@ http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/
 		<http:listener-connection host="0.0.0.0" port="8081" />
 	</http:listener-config>
 	<flow name="mule-ci-cdFlow" doc:id="d41bbb85-ab6c-4ce0-ae27-7569ef58f6e8" >
-		<http:listener doc:name="Listener" doc:id="e308a1e4-4b93-4aca-8d38-9c17f11b2798" config-ref="HTTP_Listener_config" path="/cicd"/>
-		<ee:transform doc:name="Transform Message" doc:id="765e05f2-54b2-46d0-9d9c-f701c0cc46a4" >
+		<scheduler doc:name="Scheduler" doc:id="81ae1754-695c-4381-8b2c-5b965aa4f3d3" >
+			<scheduling-strategy >
+				<fixed-frequency frequency="5" timeUnit="MINUTES"/>
+			</scheduling-strategy>
+		</scheduler>
+		<ee:transform doc:name="Transform Message" doc:id="286c1dcb-58eb-41d9-b59c-ee5ce7c953ea" >
 			<ee:message >
 				<ee:set-payload ><![CDATA[%dw 2.0
-output application/java
+output application/json
 ---
 {
-	"Time":  now()
+  "integrationName": "integration-estrutura-agencia-produtora-v2",
+  "flagError": false,
+  "object": "Agencia__c",
+  "numberRecordsProcessed": 4421,
+  "numberRecordsFailed": 4421,
+  "operation": "upsert",
+  "state": "JobComplete",
+  "records": [
+    {
+      "fields": {
+        "braseg_ExternalID__c": "1000656",
+        "braseg_nm_agencia__c": "AGÊNCIA 1000 - CHUI",
+        "braseg_nm_supex_matriz__c": "MARCELO OTTONI DE OLIVEIRA",
+        "braseg_nm_supex__c": "RICARDO AUGUSTO FERRAZ DE CAMPOS",
+        "braseg_nm_sucursal__c": "SANTA MARIA",
+        "braseg_nm_supex_regiao__c": "SUL",
+        "braseg_mt_gecom__c": "7552440",
+        "braseg_mt_supex_regiao__c": "6153348",
+        "Name": "AGÊNCIA 1000 - CHUI",
+        "braseg_nm_gecom__c": "LEANDRO VILAR SANTOS",
+        "braseg_nm_diretor__c": "ADRIANO GONCALVES MARTINS",
+        "braseg_mt_diretor__c": "7568134",
+        "braseg_mt_supex_matriz__c": "6111440",
+        "braseg_mt_supex__c": "6153348",
+        "braseg_sucursal__c": "656",
+        "braseg_nm_superintendencia_regional__c": "SUL",
+        "braseg_agencia__c": "1000"
+      },
+      "errorMessage": "STORAGE_LIMIT_EXCEEDED:storage limit exceeded:--"
+    },
+    {
+      "fields": {
+        "braseg_ExternalID__c": "1002666",
+        "braseg_nm_agencia__c": "AGÊNCIA 1002 - PORTO REAL",
+        "braseg_nm_supex_matriz__c": "FABRICIO ZUNFRILE MACHADO",
+        "braseg_nm_supex__c": "JOAO ADOLFO PEREIRA DA SILVA",
+        "braseg_nm_sucursal__c": "FLUMINENSE",
+        "braseg_nm_supex_regiao__c": "RIO DE JANEIRO-ES",
+        "braseg_mt_gecom__c": "9409261",
+        "braseg_mt_supex_regiao__c": "6566553",
+        "Name": "AGÊNCIA 1002 - PORTO REAL",
+        "braseg_nm_gecom__c": "RHALLYSON MONTEIRO RABELO",
+        "braseg_nm_diretor__c": "FRANCISCO ROSADO DE ALMEIDA JUNIOR",
+        "braseg_mt_diretor__c": "7568831",
+        "braseg_mt_supex_matriz__c": "5131642",
+        "braseg_mt_supex__c": "6566553",
+        "braseg_sucursal__c": "666",
+        "braseg_nm_superintendencia_regional__c": "RIO DE JANEIRO-ES",
+        "braseg_agencia__c": "1002"
+      },
+      "errorMessage": "STORAGE_LIMIT_EXCEEDED:storage limit exceeded:--"
+    },
+    {
+      "fields": {
+        "braseg_ExternalID__c": "1003856",
+        "braseg_nm_agencia__c": "AGÊNCIA 1003 - PRIME BEC C.COM-UFO",
+        "braseg_nm_supex_matriz__c": "FABRICIO ZUNFRILE MACHADO",
+        "braseg_nm_supex__c": "JOAO GIUSEPPE SILVEIRA LEITE ESMERALDO",
+        "braseg_nm_sucursal__c": "FORTALEZA REDE",
+        "braseg_nm_supex_regiao__c": "NORDESTE",
+        "braseg_mt_gecom__c": "7517475",
+        "braseg_mt_supex_regiao__c": "7499981",
+        "Name": "AGÊNCIA 1003 - PRIME BEC C.COM-UFO",
+        "braseg_nm_gecom__c": "RACHEL FERNANDES CAMPOS MODESTO",
+        "braseg_nm_diretor__c": "FRANCISCO ROSADO DE ALMEIDA JUNIOR",
+        "braseg_mt_diretor__c": "7568831",
+        "braseg_mt_supex_matriz__c": "5131642",
+        "braseg_mt_supex__c": "7499981",
+        "braseg_sucursal__c": "856",
+        "braseg_nm_superintendencia_regional__c": "NORDESTE",
+        "braseg_agencia__c": "1003"
+      },
+      "errorMessage": "STORAGE_LIMIT_EXCEEDED:storage limit exceeded:--"
+    },
+    {
+      "fields": {
+        "braseg_ExternalID__c": "1003907",
+        "braseg_nm_agencia__c": "TOP TIER FORTALEZA",
+        "braseg_nm_supex_matriz__c": "FABRICIO ZUNFRILE MACHADO",
+        "braseg_nm_supex__c": "JOAO GIUSEPPE SILVEIRA LEITE ESMERALDO",
+        "braseg_nm_sucursal__c": "TOP TIER",
+        "braseg_nm_supex_regiao__c": "NORDESTE",
+        "braseg_mt_gecom__c": "7517475",
+        "braseg_mt_supex_regiao__c": "7499981",
+        "Name": "TOP TIER FORTALEZA",
+        "braseg_nm_gecom__c": "RACHEL FERNANDES CAMPOS MODESTO",
+        "braseg_nm_diretor__c": "FRANCISCO ROSADO DE ALMEIDA JUNIOR",
+        "braseg_mt_diretor__c": "7568831",
+        "braseg_mt_supex_matriz__c": "5131642",
+        "braseg_mt_supex__c": "7499981",
+        "braseg_sucursal__c": "907",
+        "braseg_nm_superintendencia_regional__c": "NORDESTE",
+        "braseg_agencia__c": "1003"
+      },
+      "errorMessage": "STORAGE_LIMIT_EXCEEDED:storage limit exceeded:--"
+    },
+    {
+      "fields": {
+        "braseg_ExternalID__c": "1004606",
+        "braseg_nm_agencia__c": "AGÊNCIA 1004 - S.MATEUS",
+        "braseg_nm_supex_matriz__c": "FABRICIO ZUNFRILE MACHADO",
+        "braseg_nm_supex__c": "JOAO ADOLFO PEREIRA DA SILVA",
+        "braseg_nm_sucursal__c": "VITORIA REDE",
+        "braseg_nm_supex_regiao__c": "RIO DE JANEIRO-ES",
+        "braseg_mt_gecom__c": "7503326",
+        "braseg_mt_supex_regiao__c": "6566553",
+        "Name": "AGÊNCIA 1004 - S.MATEUS",
+        "braseg_nm_gecom__c": "KARINA GOMES BARRETO",
+        "braseg_nm_diretor__c": "FRANCISCO ROSADO DE ALMEIDA JUNIOR",
+        "braseg_mt_diretor__c": "7568831",
+        "braseg_mt_supex_matriz__c": "5131642",
+        "braseg_mt_supex__c": "6566553",
+        "braseg_sucursal__c": "606",
+        "braseg_nm_superintendencia_regional__c": "RIO DE JANEIRO-ES",
+        "braseg_agencia__c": "1004"
+      },
+      "errorMessage": "STORAGE_LIMIT_EXCEEDED:storage limit exceeded:--"
+    }
+  ]
 }]]></ee:set-payload>
 			</ee:message>
 		</ee:transform>
+		<http:request method="POST" doc:name="Request" doc:id="87d70adb-f6e0-4df4-9703-6ff3584b46bd" url="http://api-processing-logger-v2.us-e2.cloudhub.io/api/logger"/>
 	</flow>
 </mule>
